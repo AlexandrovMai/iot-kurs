@@ -1,0 +1,3 @@
+[submodule "mainfulx-com-bridge"]
+	path = mainfulx-com-bridge
+	url = https://github.com/AlexandrovMai/mainfulx-com-bridge.git

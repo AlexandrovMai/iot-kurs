@@ -1,0 +1,37 @@
+version: "3.7"
+
+networks:
+  docker_mainflux-base-net:
+    external: true
+  kafka_kafka-base-net:
+    external: true
+
+
+services:
+  nats-to-kafka:
+    image: ghcr.io/alexandrovmai/nats-to-kafka:latest
+    container_name: nats-to-kafka
+    environment:
+      - QUEUE_NAME=svc-in
+      - NATS_URL=nats:4222
+      - KAFKA_URL=kafka:9092
+      - IN_CHANNEL=c8a9aadc-a0c7-45f8-9097-a95a06584f2f
+    restart: on-failure
+    networks:
+      - docker_mainflux-base-net
+      - kafka_kafka-base-net
+      
+
+  kafka-to-nats:
+    image: ghcr.io/alexandrovmai/kafka-to-nats:latest
+    container_name: kafka-to-nats
+    environment:
+      - QUEUE_NAME=svc-out
+      - NATS_URL=nats:4222
+      - KAFKA_URL=kafka:9092
+      - GROUP_ID=cam-in
+      - OUT_CHANNEL=233232df-54e1-4d8f-998b-49be4e628e63
+    restart: on-failure
+    networks:
+      - docker_mainflux-base-net
+      - kafka_kafka-base-net
