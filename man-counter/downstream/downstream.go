@@ -10,12 +10,12 @@ import (
 )
 
 type notifier struct {
-	s *storage.Storage
-	w *kafka.Writer
-	ctx context.Context
+	s          *storage.Storage
+	w          *kafka.Writer
+	ctx        context.Context
 	cancelFunc context.CancelFunc
-	notifying bool
-	sleepTime int
+	notifying  bool
+	sleepTime  int
 }
 
 func (n *notifier) StartNotifyAsync(errorChan chan error) {
@@ -95,7 +95,7 @@ func New(ctx context.Context, s *storage.Storage, kafkaUrl, queueName string, sl
 		w:          w,
 		ctx:        ctx,
 		cancelFunc: cancelFun,
-		notifying: true,
-		sleepTime: sleepTime,
+		notifying:  true,
+		sleepTime:  sleepTime,
 	}
 }

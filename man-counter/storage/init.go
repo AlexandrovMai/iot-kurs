@@ -7,18 +7,18 @@ import (
 	"log"
 )
 
-func InitStorage(dbName, user, pass, url string) (*Storage, error)  {
+func InitStorage(dbName, user, pass, url string) (*Storage, error) {
 	st := &Storage{
 		db: pg.Connect(&pg.Options{
-			User: user,
-			Database: dbName,
-			Password: pass,
-			Addr: url,
+			User:      user,
+			Database:  dbName,
+			Password:  pass,
+			Addr:      url,
 			OnConnect: onConnected,
 		}),
 	}
 
-	_, err := st.db.Exec( "SELECT 1;")
+	_, err := st.db.Exec("SELECT 1;")
 	if err != nil {
 		log.Println("Error: cannot connect to DB: ", err.Error())
 		return nil, err
@@ -54,4 +54,3 @@ func onConnected(ctx context.Context, conn *pg.Conn) (err error) {
 	}
 	return
 }
-

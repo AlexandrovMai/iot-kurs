@@ -6,6 +6,6 @@ const (
 )
 
 type Message struct {
-	Name string `json:"n"`
-	Value int `json:"v"`
+	Name  string `json:"n"`
+	Value int    `json:"v"`
 }

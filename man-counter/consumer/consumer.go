@@ -16,10 +16,10 @@ type Consumer interface {
 }
 
 type consumer struct {
-	receive bool
-	ctx context.Context
+	receive  bool
+	ctx      context.Context
 	cancelFn context.CancelFunc
-	reader *kafka.Reader
+	reader   *kafka.Reader
 }
 
 func (c *consumer) StartConsumeAsync(receiver MessageReceiver, errorChan chan error) {

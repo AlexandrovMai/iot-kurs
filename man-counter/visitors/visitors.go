@@ -17,8 +17,8 @@ func New(s *storage.Storage) *Visitors {
 }
 
 type Payload struct {
-	Value int `json:"v"`
-	Name string `json:"n"`
+	Value int    `json:"v"`
+	Name  string `json:"n"`
 }
 
 func (v *Visitors) OnMessage(key, value []byte) error {
