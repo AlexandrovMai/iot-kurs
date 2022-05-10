@@ -1,3 +1,6 @@
 [submodule "mainfulx-com-bridge"]
 	path = mainfulx-com-bridge
 	url = https://github.com/AlexandrovMai/mainfulx-com-bridge.git
+[submodule "man-counter"]
+	path = man-counter
+	url = https://github.com/AlexandrovMai/man-counter.git
