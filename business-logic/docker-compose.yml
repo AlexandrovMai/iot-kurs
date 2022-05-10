@@ -1,0 +1,37 @@
+version: "3.7"
+networks:
+  businnes-base-net:
+    driver: bridge
+  kafka_kafka-base-net:
+    external: true
+    
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    expose:
+      - 5432
+    networks:
+      - businnes-base-net
+
+  counter:
+    image: ghcr.io/alexandrovmai/business-logic:latest
+    restart: always
+    environment:
+      POSTGRES_URL: postgres:5432
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASS: ${DB_PASSWORD}
+      KAFKA_URL: kafka:9092
+      KAFKA_GROUP_ID: ${DB_NAME}
+      OUT_QUEUE_NAME: ${OUT_QUEUE_NAME}
+      CAM_QUEUE_NAME: ${CAM_QUEUE_NAME}
+      DEVICE_QUEUE_NAME: ${DEVICE_QUEUE_NAME}
+    depends_on:
+      - postgres
+    networks:
+      - businnes-base-net
+      - kafka_kafka-base-net

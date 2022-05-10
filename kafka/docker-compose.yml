@@ -18,6 +18,7 @@ services:
     image: 'bitnami/kafka:latest'
     expose:
       - 9092
+    restart: on-failure
     networks:
       - kafka-base-net
     environment:
